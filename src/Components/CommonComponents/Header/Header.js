@@ -12,7 +12,7 @@ export default function Header() {
         ></input>
         <div className="user-details">
           <img className="notification" src={bell}></img>
-          <p>Letsupgrade student</p>
+          <p className="user-name">Letsupgrade student</p>
           <div className="dp"></div>
         </div>
       </header>
