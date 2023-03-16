@@ -1,3 +1,13 @@
 body{
   background-color: #efefef;
 }
+.app-container{
+  display: flex;
+  width: 100%;
+}
+.sidenav-container{
+  width: 15%;
+}
+.main-container{
+  width: 85%;
+}
