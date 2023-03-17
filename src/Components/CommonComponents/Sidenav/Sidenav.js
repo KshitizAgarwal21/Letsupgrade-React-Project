@@ -12,6 +12,12 @@ export default function Sidenav() {
           <Link to="/account">
             <li>Account</li>
           </Link>
+          <Link to="/products">
+            <li>Product List</li>
+          </Link>
+          <Link to="/add">
+            <li>Add Product </li>
+          </Link>
         </ul>
       </div>
     </div>
