@@ -1,48 +1,80 @@
 import { autocompleteClasses, Box, Button, TextField } from "@mui/material";
 import React from "react";
 import "./account.css";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Edit from "./Edit Profile/Edit";
+import Change from "./Change Password/Change";
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
 export default function Account() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <div>
       <Box
         sx={{
-          width: 600,
-          height: 300,
-          marginLeft: "auto",
-          marginRight: "auto",
-          marginTop: "15%",
-          backgroundColor: "white",
-          borderRadius: "8px",
-          "&:hover": {
-            backgroundColor: "white",
-            opacity: [0.9, 0.8, 0.7],
-          },
+          width: "95%",
+          margin: "0 auto",
+          marginTop: "20px",
+          flexGrow: 1,
+          bgcolor: "background.paper",
+          display: "flex",
+          height: "100vh",
         }}
       >
-        <TextField
-          required
-          id="standard-required"
-          label="First Name"
-          variant="standard"
-          className="myinput"
-        ></TextField>
-        <TextField
-          required
-          id="standard-required"
-          label="Last Name"
-          variant="standard"
-          className="myinput"
-        ></TextField>
-        <TextField
-          required
-          id="standard-required"
-          label="Email"
-          variant="standard"
-          className="myinput"
-        ></TextField>
-        <Button variant="contained" disableElevation className="mybutton">
-          Update!
-        </Button>
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          aria-label="Vertical tabs example"
+          sx={{ borderRight: 1, borderColor: "divider" }}
+        >
+          <Tab label="Edit Profile" {...a11yProps(0)} />
+          <Tab label="Change Password" {...a11yProps(1)} />
+        </Tabs>
+        <TabPanel value={value} index={0} style={{ width: "80%" }}>
+          <Edit />
+        </TabPanel>
+        <TabPanel value={value} index={1} style={{ width: "80%" }}>
+          <Change />
+        </TabPanel>
       </Box>
     </div>
   );

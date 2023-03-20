@@ -1,0 +1,51 @@
+.display_picture{
+    background-color: aqua;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
+.action-img{
+    background-color: dodgerblue;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    margin-left: 10px;
+    color: white;
+cursor: pointer;
+}
+.action-img:hover{
+    opacity: 0.8;
+}
+.uncolored{
+    background-color: transparent;
+    border: 0.5px solid #efefef;
+    color: black;
+}
+.uncolored:hover{
+    background-color: wheat;
+}
+.form-container{
+    margin-top: 20px;
+    margin-left: 10px;
+   
+}
+.fields-container{
+display: flex;
+margin-top: 20px;
+}
+.edit-fields{
+    width: 30%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+   margin-left: 5px;
+   margin-bottom: -5px;
+margin-right: 20px;
+}
+.input-label{
+    width: 100px;
+}
+.save{
+    margin-top: 50px;
+}
