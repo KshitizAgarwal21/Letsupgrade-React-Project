@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Account from "./Components/Account/Account";
@@ -7,22 +8,19 @@ import Histogram from "./Components/CommonComponents/Histogram/Histogram";
 import Sidenav from "./Components/CommonComponents/Sidenav/Sidenav";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import Login from "./Components/Login/Login";
+
 import Productslist from "./Components/Products List/Productslist";
 
 function App() {
-  if (localStorage.getItem("token") != null) {
-    return (
-      <div>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Login />}></Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
-    );
-  } else {
-    return (
-      <BrowserRouter>
+  const [token, setToken] = useState();
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
+
+  return (
+    <BrowserRouter>
+      {token == null && <Login state={setToken} />}
+      {token != null && (
         <div>
           <div className="app-container">
             <div className="sidenav-container">
@@ -34,7 +32,7 @@ function App() {
               </div>
               <div className="content-container">
                 <Routes>
-                  <Route path="/" element={<Dashboard />}></Route>
+                  <Route path="/dashboard" element={<Dashboard />}></Route>
                   <Route path="/account" element={<Account />}></Route>
                   <Route path="/products" element={<Productslist />}></Route>
                   <Route path="/add" element={<AddProduct />}></Route>
@@ -43,9 +41,9 @@ function App() {
             </div>
           </div>
         </div>
-      </BrowserRouter>
-    );
-  }
+      )}
+    </BrowserRouter>
+  );
 }
 
 export default App;
