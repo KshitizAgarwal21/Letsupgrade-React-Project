@@ -32,7 +32,7 @@ function App() {
               </div>
               <div className="content-container">
                 <Routes>
-                  <Route path="/dashboard" element={<Dashboard />}></Route>
+                  <Route index element={<Dashboard />}></Route>
                   <Route path="/account" element={<Account />}></Route>
                   <Route path="/products" element={<Productslist />}></Route>
                   <Route path="/add" element={<AddProduct />}></Route>

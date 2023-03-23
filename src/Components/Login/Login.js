@@ -25,7 +25,7 @@ export default function Login(props) {
     console.log(decodedData);
 
     props.state(response.data);
-    navigate("/dashboard");
+    navigate("/");
   };
   return (
     <div>

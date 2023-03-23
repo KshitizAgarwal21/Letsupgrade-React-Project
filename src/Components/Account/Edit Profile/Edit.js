@@ -1,7 +1,14 @@
 import { Box, InputLabel } from "@mui/material";
+import axios from "axios";
 import React from "react";
+import "../../../Utility/Interceptors/ReqInterceptor";
 import "./edit.css";
-export default function Edit() {
+export default function Edit(props) {
+  const removeDp = () => {
+    axios.post("http://localhost:8080/removedp").then((res) => {
+      console.log(res);
+    });
+  };
   return (
     <Box
       sx={{
@@ -14,10 +21,17 @@ export default function Edit() {
       }}
     >
       <div style={{ display: "flex" }}>
-        <div className="display_picture"></div>
+        <div className="display_picture">
+          <img
+            src={props.state.avatar}
+            style={{ height: "100px", width: "100px" }}
+          ></img>
+        </div>
         <div style={{ marginTop: "25px" }}>
           <button className="action-img">Change Avatar</button>
-          <button className="action-img uncolored">Remove</button>
+          <button className="action-img uncolored" onClick={removeDp}>
+            Remove
+          </button>
         </div>
       </div>
       <div className="form-container">
