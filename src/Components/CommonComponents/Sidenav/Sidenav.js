@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import "./sidenav.css";
 export default function Sidenav() {
+  const navigate = useNavigate();
   return (
     <div>
       <div className="sidenav-container">
@@ -18,6 +19,14 @@ export default function Sidenav() {
           <Link to="/add">
             <li>Add Product </li>
           </Link>
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              navigate("/");
+            }}
+          >
+            Sign out
+          </button>
         </ul>
       </div>
     </div>

@@ -1,12 +1,17 @@
 import { Box, InputLabel } from "@mui/material";
 import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../../../Utility/Interceptors/ReqInterceptor";
 import "./edit.css";
 export default function Edit(props) {
+  const navigate = useNavigate();
   const removeDp = () => {
     axios.post("http://localhost:8080/removedp").then((res) => {
       console.log(res);
+      localStorage.removeItem("token");
+      localStorage.setItem("token", res.data.token);
+      window.location.reload();
     });
   };
   return (

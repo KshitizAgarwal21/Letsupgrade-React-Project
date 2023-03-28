@@ -21,6 +21,7 @@ export default function Login(props) {
     var response = await axios.post("http://localhost:8080/login", loginData);
 
     var decodedData = decodeToken(response.data);
+    localStorage.removeItem("token");
     localStorage.setItem("token", response.data);
     console.log(decodedData);
 

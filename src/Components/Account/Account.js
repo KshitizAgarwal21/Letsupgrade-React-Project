@@ -41,7 +41,8 @@ function a11yProps(index) {
     "aria-controls": `vertical-tabpanel-${index}`,
   };
 }
-export default function Account() {
+export default function Account(props) {
+  console.log(props);
   const [value, setValue] = React.useState(0);
   var [decodedData, setFullData] = useState();
   useEffect(() => {
