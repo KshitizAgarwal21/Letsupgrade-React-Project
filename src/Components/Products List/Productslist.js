@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
@@ -8,6 +8,7 @@ import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
 import "./products.css";
 import axios from "axios";
+import { searchContext } from "../../Context/searchContext";
 const columns = [
   { field: "ID", headerName: "ID", width: 70 },
   { field: "Category", headerName: "Category", width: 130 },
@@ -41,14 +42,16 @@ const columns = [
 
 export default function Productslist() {
   const [category, setCategory] = React.useState("");
-  const [searchValue, setSearchValue] = useState("");
+
   const [temp, setTemp] = useState();
   const [rows, setRows] = useState();
+
+  // const context = useContext(searchContext);
+  // var searchVariable = context.searchVariable;
+  // var updateSearchVariable = context.updateSearchVariable;
+  const { searchVariable, updateSearchVariable } = useContext(searchContext);
   const handleChange = (event) => {
     setCategory(event.target.value);
-  };
-  const getSearchItem = (e) => {
-    setSearchValue(e.target.value);
   };
 
   const filter = async () => {
@@ -67,9 +70,9 @@ export default function Productslist() {
     setRows(
       rows.filter((elem) => {
         return (
-          elem.Name.toLowerCase().includes(searchValue) ||
-          elem.Category.toLowerCase().includes(searchValue) ||
-          elem.ID.toLowerCase().includes(searchValue)
+          elem.Name.toLowerCase().includes(searchVariable) ||
+          elem.Category.toLowerCase().includes(searchVariable) ||
+          elem.ID.toLowerCase().includes(searchVariable)
         );
       })
     );
@@ -93,12 +96,12 @@ export default function Productslist() {
   }, [category]);
 
   useEffect(() => {
-    if (searchValue != "") {
+    if (searchVariable != "") {
       search();
     } else {
       setRows(temp);
     }
-  }, [searchValue]);
+  }, [searchVariable]);
   return (
     <div className="productlist-container">
       <h2>Product List </h2>
@@ -131,7 +134,7 @@ export default function Productslist() {
               <MenuItem value="Fashion">Fashion</MenuItem>
               <MenuItem value="Kitchen">Kitchen</MenuItem>
             </Select>
-            <input type="text" onChange={getSearchItem}></input>
+
             <FormHelperText></FormHelperText>
           </FormControl>
           <div style={{ height: 600, width: "90%", marginLeft: "10px" }}>
