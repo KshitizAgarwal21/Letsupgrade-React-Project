@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./add.css";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
@@ -7,9 +7,17 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import General from "../General /General";
 import Shipping from "../Shipping/Shipping";
+import axios from "axios";
 export default function AddProduct() {
   const [value, setValue] = React.useState("1");
-
+  const [productData, setProductData] = useState({});
+  const addProductAPI = async () => {
+    const resp = await axios.post(
+      "http://localhost:8080/addproduct",
+      productData
+    );
+    console.log(resp.data);
+  };
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -29,12 +37,17 @@ export default function AddProduct() {
               </TabList>
             </Box>
             <TabPanel value="1">
-              <General />
+              <General
+                state={{ value, setValue, productData, setProductData }}
+              />
             </TabPanel>
             <TabPanel value="2">
-              <Shipping />
+              <Shipping state={{ productData, setProductData }} />
             </TabPanel>
           </TabContext>
+          <button className="action-img save" onClick={addProductAPI}>
+            Add Product
+          </button>
         </Box>
       </div>
     </div>

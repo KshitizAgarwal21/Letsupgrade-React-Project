@@ -1,7 +1,13 @@
 import React from "react";
 import { InputLabel } from "@mui/material";
 import Box from "@mui/material/Box";
-export default function Shipping() {
+export default function Shipping(props) {
+  const handleChange = (e) => {
+    props.state.setProductData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <div>
       <Box
@@ -42,7 +48,13 @@ export default function Shipping() {
         <InputLabel>
           <span style={{ color: "red" }}>*</span>Shipping Fees
         </InputLabel>
-        <input type="number" className="product-input" placeholder=" $"></input>
+        <input
+          type="number"
+          className="product-input"
+          placeholder=" $"
+          onChange={handleChange}
+          name="Shipping"
+        ></input>
       </Box>
     </div>
   );

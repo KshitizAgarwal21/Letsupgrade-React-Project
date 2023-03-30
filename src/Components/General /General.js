@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./general.css";
 import Box from "@mui/material/Box";
 import { InputLabel } from "@mui/material";
 import ChartCard from "../CommonComponents/ChartCard/ChartCard";
-export default function General() {
+export default function General(props) {
+  const handleChange = (e) => {
+    props.state.setProductData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <div style={{ display: "flex" }}>
       <Box
@@ -24,6 +30,8 @@ export default function General() {
           type="text"
           className="product-input"
           placeholder="Product Name"
+          onChange={handleChange}
+          name="Name"
         ></input>
         <InputLabel>
           <span style={{ color: "red" }}>*</span>Price
@@ -32,24 +40,41 @@ export default function General() {
           type="number"
           className="product-input"
           placeholder=" $ Price"
+          onChange={handleChange}
+          name="Price"
         ></input>
         <InputLabel>
-          <span style={{ color: "red" }}>*</span>Description
+          <span style={{ color: "red" }}>*</span>Quantity
         </InputLabel>
         <input
-          type="text"
+          type="number"
           className="product-input-desc"
-          placeholder=""
+          placeholder="Quantity"
+          onChange={handleChange}
+          name="Quantity"
         ></input>
         <InputLabel>
           <span style={{ color: "red" }}>*</span>Category
         </InputLabel>
-        <select className="category-dropdown">
+        <select
+          className="category-dropdown"
+          onChange={handleChange}
+          name="Category"
+        >
+          <option selected value=""></option>
           <option value="Electronics">Electronics</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Electronics">Electronics</option>
-          <option value="Electronics">Electronics</option>
+          <option value="Fashion">Fashion</option>
+          <option value="Furniture">Furniture</option>
         </select>
+        <button
+          className="action-img save"
+          onClick={() => {
+            props.state.setValue("2");
+            console.log(props.state.productData);
+          }}
+        >
+          Next
+        </button>
       </Box>
       <div
         className="chart-container"
