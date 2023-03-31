@@ -64,6 +64,7 @@ export default function Productslist() {
     arr.forEach((elem) => {
       elem.id = c++;
     });
+    console.log(arr);
     setRows(arr);
   };
   const search = () => {
