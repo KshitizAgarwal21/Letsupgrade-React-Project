@@ -11,12 +11,21 @@ import axios from "axios";
 export default function AddProduct() {
   const [value, setValue] = React.useState("1");
   const [productData, setProductData] = useState({});
+  const [formData, setFormData] = useState();
   const addProductAPI = async () => {
     const resp = await axios.post(
       "http://localhost:8080/addproduct",
       productData
     );
-    console.log(resp.data);
+    if (resp.data.msg === "Product added successfully") {
+      formData.append("ID", resp.data.ID);
+      const addedImage = await axios.post(
+        "http://localhost:8080/uploadprodimages",
+        formData
+      );
+      console.log(addedImage.data);
+    }
+    // console.log(resp.data);
   };
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -38,11 +47,17 @@ export default function AddProduct() {
             </Box>
             <TabPanel value="1">
               <General
-                state={{ value, setValue, productData, setProductData }}
+                state={{
+                  value,
+                  setValue,
+                  productData,
+                  setProductData,
+                  setFormData,
+                }}
               />
             </TabPanel>
             <TabPanel value="2">
-              <Shipping state={{ productData, setProductData }} />
+              <Shipping state={{ productData, setProductData, formData }} />
             </TabPanel>
           </TabContext>
           <button className="action-img save" onClick={addProductAPI}>

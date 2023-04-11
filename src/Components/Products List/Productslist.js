@@ -6,6 +6,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { DataGrid } from "@mui/x-data-grid";
+import Avatar from "@mui/material/Avatar";
 import "./products.css";
 import axios from "axios";
 import { searchContext } from "../../Context/searchContext";
@@ -33,10 +34,17 @@ const columns = [
     width: 90,
   },
   {
-    field: "UnitsSold",
-    headerName: "Units Sold",
-    type: "number",
-    width: 90,
+    field: "Picture",
+    headerName: "Picture",
+    width: 200,
+    renderCell: (params) => {
+      console.log(params.row.Picture);
+      return (
+        <>
+          <Avatar src={`/${params.row.Picture}`} />
+        </>
+      );
+    },
   },
 ];
 

@@ -15,12 +15,17 @@ export default function General(props) {
   const changeFile = (e) => {
     setFile(e.target.files[0]);
   };
-  var formData = new FormData();
+  var formDataFile = new FormData();
   const upload = () => {
-    formData.append("myFile", selectedFile);
-    axios.post("http://localhost:8080/upload", formData).then((resp) => {
-      console.log(resp.data);
-    });
+    formDataFile.append("myFile", selectedFile);
+
+    props.state.setFormData(formDataFile);
+
+    // axios
+    //   .post("http://localhost:8080/uploadprodimages", formData)
+    //   .then((resp) => {
+    //     console.log(resp.data);
+    //   });
   };
   return (
     <div style={{ display: "flex" }}>
