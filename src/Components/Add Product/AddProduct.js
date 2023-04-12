@@ -7,11 +7,14 @@ import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
 import General from "../General /General";
 import Shipping from "../Shipping/Shipping";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import axios from "axios";
 export default function AddProduct() {
   const [value, setValue] = React.useState("1");
   const [productData, setProductData] = useState({});
   const [formData, setFormData] = useState();
+  const [success, setSuccess] = useState(false);
   const addProductAPI = async () => {
     const resp = await axios.post(
       "http://localhost:8080/addproduct",
@@ -23,7 +26,9 @@ export default function AddProduct() {
         "http://localhost:8080/uploadprodimages",
         formData
       );
-      console.log(addedImage.data);
+      if (addedImage.data.msg === "file uploaded successfully") {
+        setSuccess(true);
+      }
     }
     // console.log(resp.data);
   };
@@ -34,6 +39,13 @@ export default function AddProduct() {
     <div>
       <div className="productlist-container">
         <h2>Add New Product</h2>
+        {success && (
+          <Alert severity="success">
+            <AlertTitle>Success</AlertTitle>
+            Product added successfully <strong>check it out!</strong>
+          </Alert>
+        )}
+
         <Box sx={{ width: "100%", typography: "body1" }}>
           <TabContext value={value}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>

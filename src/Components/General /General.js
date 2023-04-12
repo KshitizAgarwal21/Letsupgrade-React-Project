@@ -82,6 +82,7 @@ export default function General(props) {
           <option value="Electronics">Electronics</option>
           <option value="Fashion">Fashion</option>
           <option value="Furniture">Furniture</option>
+          <option value="Kitchen">Kitchen</option>
         </select>
         <button
           className="action-img save"

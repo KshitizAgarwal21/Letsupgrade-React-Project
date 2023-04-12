@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./pie.css";
+import axios from "axios";
 import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
+// const data = [
+//   { name: "Group A", value: 100 },
+//   { name: "Group B", value: 100 },
+//   { name: "Group C", value: 100 },
+//   { name: "Group D", value: 100 },
+// ];
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 const RADIAN = Math.PI / 180;
@@ -36,6 +37,39 @@ const renderCustomizedLabel = ({
   );
 };
 export default function PieC() {
+  const [data, setData] = useState([{}]);
+  const getProductList = async () => {
+    const resp = await axios.post("http://localhost:8080/getproducts");
+
+    var arr = resp.data;
+    var c = 1;
+    arr.forEach((elem) => {
+      elem.id = c++;
+    });
+    var newarr = [];
+    arr.map((elem) => {
+      newarr.push({ name: elem.Category, value: elem.Quantity });
+    });
+    var temp = [];
+    var reduced = newarr.map((elem, index) => {
+      if (temp.length != 0) {
+        if (elem.name === temp[index].name) {
+          temp[index].value += elem.value;
+        } else {
+          temp.push(elem);
+        }
+      } else {
+        temp.push(elem);
+      }
+      return temp;
+    }, []);
+    console.log(reduced);
+    setData(newarr);
+  };
+  useEffect(() => {
+    getProductList();
+  }, []);
+
   return (
     <div>
       <div className="pie-container">
