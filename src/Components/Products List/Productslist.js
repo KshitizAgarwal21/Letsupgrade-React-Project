@@ -38,7 +38,6 @@ const columns = [
     headerName: "Picture",
     width: 200,
     renderCell: (params) => {
-      console.log(params.row.Picture);
       return (
         <>
           <Avatar src={`/${params.row.Picture}`} />

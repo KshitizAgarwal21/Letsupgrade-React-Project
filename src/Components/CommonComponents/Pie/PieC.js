@@ -32,6 +32,7 @@ const renderCustomizedLabel = ({
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
     >
+      {}
       {`${(percent * 100).toFixed(0)}%`}
     </text>
   );
@@ -50,21 +51,22 @@ export default function PieC() {
     arr.map((elem) => {
       newarr.push({ name: elem.Category, value: elem.Quantity });
     });
-    var temp = [];
-    var reduced = newarr.map((elem, index) => {
-      if (temp.length != 0) {
-        if (elem.name === temp[index].name) {
-          temp[index].value += elem.value;
-        } else {
-          temp.push(elem);
-        }
+    console.log(newarr);
+    var reduced = newarr.reduce((acc, curr) => {
+      if (acc[curr.name]) {
+        acc[curr.name] = acc[curr.name] + curr.value;
       } else {
-        temp.push(elem);
+        acc[curr.name] = curr.value;
       }
-      return temp;
-    }, []);
+      return acc;
+    }, {});
     console.log(reduced);
-    setData(newarr);
+    let finalArr = [];
+    for (let key in reduced) {
+      finalArr.push({ name: key, value: reduced[key] });
+    }
+
+    setData(finalArr);
   };
   useEffect(() => {
     getProductList();
@@ -79,7 +81,8 @@ export default function PieC() {
               data={data}
               cx="50%"
               cy="50%"
-              labelLine={false}
+              labelLine={true}
+              nameKey="name"
               label={renderCustomizedLabel}
               outerRadius={80}
               fill="#8884d8"
