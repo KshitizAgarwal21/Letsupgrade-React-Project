@@ -4,7 +4,37 @@
     padding: 12px;
 width: 720px;
 height: 225px;
+position: relative;
 
-background: #2BEBC8;
+
 border-radius: 8px;
+}
+.banner{
+    
+    width: 720px;
+    height: 225px;
+   
+}
+.banner img{
+   
+    width: 720px;
+    height: 225px;
+    
+    
+
+}
+.overlay{position: absolute;
+top: 0;
+margin: 12px;}
+.basicDetails{
+    margin: 10px;
+    color: white;
+    font-size: 24px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+.date{
+    margin: 10px;
+    color: white;
+    font-size: 24px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }

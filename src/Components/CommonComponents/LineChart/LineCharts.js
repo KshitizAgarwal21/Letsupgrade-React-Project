@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   LineChart,
   Line,
@@ -13,53 +13,49 @@ import "../ChartCard/chartcard.css";
 const data = [
   {
     name: "Page A",
-    uv: 0,
+    uv: 4000,
     pv: 2400,
-    amt: 0,
+    amt: 2400,
   },
   {
     name: "Page B",
-    uv: 0,
+    uv: 3000,
     pv: 1398,
-    amt: 0,
+    amt: 2210,
   },
   {
     name: "Page C",
-    uv: 0,
+    uv: 2000,
     pv: 9800,
-    amt: 0,
+    amt: 2290,
   },
   {
     name: "Page D",
-    uv: 0,
+    uv: 2780,
     pv: 3908,
-    amt: 0,
+    amt: 2000,
   },
   {
     name: "Page E",
-    uv: 0,
+    uv: 1890,
     pv: 4800,
-    amt: 0,
+    amt: 2181,
   },
   {
     name: "Page F",
     uv: 2390,
     pv: 3800,
-    amt: 0,
+    amt: 2500,
   },
   {
     name: "Page G",
     uv: 3490,
     pv: 4300,
-    amt: 0,
+    amt: 2100,
   },
 ];
 
 export default function LineCharts(props) {
-  useEffect(() => {
-    console.log(props);
-  });
-
   return (
     <div>
       <div className="chart-container">
@@ -68,7 +64,7 @@ export default function LineCharts(props) {
           <LineChart width={300} height={100} data={data}>
             <Line
               type="monotone"
-              dataKey="amt"
+              dataKey="pv"
               stroke="#8884d8"
               strokeWidth={2}
             />

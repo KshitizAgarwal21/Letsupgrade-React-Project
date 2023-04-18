@@ -51,7 +51,7 @@ export default function PieC() {
     arr.map((elem) => {
       newarr.push({ name: elem.Category, value: elem.Quantity });
     });
-    console.log(newarr);
+
     var reduced = newarr.reduce((acc, curr) => {
       if (acc[curr.name]) {
         acc[curr.name] = acc[curr.name] + curr.value;
@@ -60,7 +60,7 @@ export default function PieC() {
       }
       return acc;
     }, {});
-    console.log(reduced);
+
     let finalArr = [];
     for (let key in reduced) {
       finalArr.push({ name: key, value: reduced[key] });
