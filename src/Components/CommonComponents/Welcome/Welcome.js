@@ -18,13 +18,13 @@ export default function Welcome() {
     var date = new Date();
     setDate(date.toString().substring(0, 25));
 
-    if (date.getHours() > 5 && date.getHours < 12) {
+    if (date.getHours() >= 5 && date.getHours <= 12) {
       setWish("Good morning");
       setBanner(morning);
-    } else if (date.getHours() > 12 && date.getHours() < 16) {
+    } else if (date.getHours() >= 12 && date.getHours() <= 16) {
       setWish("Good afternoon");
       setBanner(afternoon);
-    } else if (date.getHours() > 16 && date.getHours() < 20) {
+    } else if (date.getHours() >= 16 && date.getHours() <= 20) {
       setWish("Good evening");
       setBanner(evening);
     } else {
